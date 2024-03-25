@@ -96,33 +96,6 @@ local threeDCube = Create("ImageButton", {
 local UIListLayoutPath = PATH.LeftFrame.ThreeDCube.ViewCrop.Frame.StateOverlay.ContentFrame.ContentFolder
 local ContentFramePath = PATH.LeftFrame.ThreeDCube.ViewCrop.Frame.StateOverlay.ContentFrame
 
-do
-    local Line = Create("Frame", {
-        BorderSizePixel = 0,
-        BackgroundTransparency = 0.8,
-        BackgroundColor3 = Color3.fromRGB(255,255,255),
-        Parent = UIListLayoutPath,
-        Size = UDim2.new(0, 1, 1, -10),
-        LayoutOrder = 7,
-        Name = "Line",
-        Visible = false
-    })
-    local UserIcon = Create("ImageLabel", {
-        Image = game:GetService("Players"):GetUserThumbnailAsync(game:GetService("Players").LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420),
-        BackgroundTransparency = 0.15,
-        Size = UDim2.new(0, 36, 0, 36),
-        BackgroundColor3= Color3.fromRGB(234,234,234),
-        Parent = UIListLayoutPath,
-        LayoutOrder = 8,
-        Name = "UserIcon",
-        Visible = false
-    }, {
-        Create("UICorner", {
-            CornerRadius = UDim.new(1,0)
-        })
-    })
-end
-
 if PATH.LeftFrame:FindFirstChild("ChatIcon") then
     PATH.LeftFrame.ChatIcon.Parent = UIListLayoutPath
 end
@@ -160,13 +133,6 @@ PATH.LeftFrame['MenuIcon'].Background.MouseLeave:Connect(function()
 end)
     
 Setting2("ChatIcon")
-UIListLayoutPath.ChatIcon.Background.MouseEnter:Connect(function()
-    TweenService:Create(PATH.LeftFrame.ThreeDCube.ViewCrop.Frame.StateOverlay.ContentFrame.ContentFolder['ChatIcon'].Background, TweenInfo.new(0.15), {BackgroundTransparency=0.88}):Play()
-end)
-
-UIListLayoutPath.ChatIcon.Background.MouseLeave:Connect(function()
-    TweenService:Create(PATH.LeftFrame.ThreeDCube.ViewCrop.Frame.StateOverlay.ContentFrame.ContentFolder['ChatIcon'].Background, TweenInfo.new(0.15), {BackgroundTransparency=1}):Play()
-end)
     
 UIListLayoutPath.ChatIcon.Size = UDim2.new(0, 36, 0, 36)
 UIListLayoutPath.ChatIcon.Background.Size = UDim2.new(0, 36, 0, 36)
@@ -187,13 +153,6 @@ function Settings3(Name)
 end
 
 Settings3("MoreMenu")
-UIListLayoutPath['MoreMenu'].OpenButton.MouseEnter:Connect(function()
-    TweenService:Create(PATH.LeftFrame.ThreeDCube.ViewCrop.Frame.StateOverlay.ContentFrame.ContentFolder['MoreMenu'].OpenButton, TweenInfo.new(0.15), {BackgroundTransparency=0.88}):Play()
-end)
-
-UIListLayoutPath['MoreMenu'].OpenButton.MouseLeave:Connect(function()
-    TweenService:Create(PATH.LeftFrame.ThreeDCube.ViewCrop.Frame.StateOverlay.ContentFrame.ContentFolder['MoreMenu'].OpenButton, TweenInfo.new(0.15), {BackgroundTransparency=1}):Play()
-end)
 
 PATH.LeftFrame.Layout.VerticalAlignment = "Bottom"
 
@@ -234,7 +193,9 @@ PATH.LeftFrame.ThreeDCube.ViewCrop.Frame.StateOverlay.MouseButton1Click:Connect(
         threeDCube.ViewCrop.Size = UDim2.new(8, 0, 1, 10000)
         UIListLayoutPath.MoreMenu.Visible = true
         UIListLayoutPath.Line.Visible = true
+        UIListLayoutPath.Line2.Visible = true
         UIListLayoutPath.UserIcon.Visible = true
+        UIListLayoutPath.InfoIcon.Visible = true
     else
         threeDCube.ViewCrop.Size = UDim2.new(1, 0, 1, 10000)
         threeDCube.ViewCrop.Frame.StateOverlay.BackgroundTransparency = 1
@@ -243,8 +204,174 @@ PATH.LeftFrame.ThreeDCube.ViewCrop.Frame.StateOverlay.MouseButton1Click:Connect(
         threeDCube.ViewCrop.Frame.StateOverlay.Icon.Image = "rbxassetid://16815954372"
         UIListLayoutPath.MoreMenu.Visible = false
         UIListLayoutPath.Line.Visible = false
+        UIListLayoutPath.Line2.Visible = false
         UIListLayoutPath.UserIcon.Visible = false
+        UIListLayoutPath.InfoIcon.Visible = false
         TweenService:Create(threeDCube, TweenInfo.new(0.07, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 42 + 36 + 4, 0, 42)}):Play()
     end
 end)
   
+local Line = Create("Frame", {
+    BorderSizePixel = 0,
+    BackgroundTransparency = 0.8,
+    BackgroundColor3 = Color3.fromRGB(255,255,255),
+    Parent = UIListLayoutPath,
+    Size = UDim2.new(0, 1, 1, -10),
+    LayoutOrder = 7,
+    Name = "Line",
+    Visible = false
+})
+local UserIcon = Create("ImageLabel", {
+    Image = game:GetService("Players"):GetUserThumbnailAsync(game:GetService("Players").LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420),
+    BackgroundTransparency = 0.15,
+    Size = UDim2.new(0, 36, 0, 36),
+    BackgroundColor3= Color3.fromRGB(234,234,234),
+    Parent = UIListLayoutPath,
+    LayoutOrder = 8,
+    Name = "UserIcon",
+    Visible = false
+}, {
+    Create("UICorner", {
+        CornerRadius = UDim.new(1,0)
+    })
+})
+local Line2 = Create("Frame", {
+    BorderSizePixel = 0,
+    BackgroundTransparency = 0.8,
+    BackgroundColor3 = Color3.fromRGB(255,255,255),
+    Parent = UIListLayoutPath,
+    Size = UDim2.new(0, 1, 1, -10),
+    LayoutOrder = 9,
+    Name = "Line2",
+    Visible = false
+})
+local InfoIcon = Create("TextButton", {
+    Name = "InfoIcon",
+    Text = "",
+    BackgroundTransparency = 1,
+    BackgroundColor3 = Color3.fromRGB(255,255,255),
+    Size = UDim2.new(0, 36, 0, 36), 
+    Parent = UIListLayoutPath,
+    LayoutOrder = 10,
+    Visible = false,
+    AutoButtonColor = false
+}, {
+    Create("UICorner", {
+        CornerRadius = UDim.new(1,0)
+    }),
+    Create("ImageLabel", {
+        Image = "rbxassetid://16858092523",
+        BackgroundTransparency = 1,
+        Size = UDim2.new(0, 23, 0, 23),
+        Name = "Icon",
+        AnchorPoint = Vector2.new(0.5,0.5),
+        Position = UDim2.fromScale(0.5,0.5)
+    })
+})
+local InfoUIScreenGui = Create("ScreenGui", {
+    Name = "InfoUI",
+    Parent = game:GetService("Players").LocalPlayer.PlayerGui
+}, {
+    Create("Frame", {
+        BackgroundTransparency = 0.3,
+        BackgroundColor3 = Color3.fromRGB(0,0,0),
+        Size = UDim2.new(0, 450, 0, 200),
+        Position = UDim2.new(0.5, 0, 3, 0),
+        AnchorPoint = Vector2.new(0.5,0.5)
+    }, {
+        Create("UIPadding", {
+            PaddingTop = UDim.new(0, 17),
+            PaddingLeft = UDim.new(0, 25),
+            PaddingRight = UDim.new(0, 25),
+            PaddingBottom = UDim.new(0, 17)
+        }),
+        Create("UICorner", {
+            CornerRadius = UDim.new(0, 21)
+        }),
+        Create("TextLabel", {
+            Text = "ExperienceControl", 
+            TextColor3 = Color3.fromRGB(255,255,255),
+            TextSize = 25,
+            Font = "GothamMedium",
+            TextXAlignment = "Left",
+            TextYAlignment = "Top",
+            BackgroundTransparency = 1
+        }),
+        Create("TextLabel", {
+            Text = "This is an unofficial script and I do not encourage anyone to use it, this script is made for exploits. this script was written to have fanmade experience control",
+            TextColor3 = Color3.fromRGB(255,255,255),
+            TextSize = 15,
+            Font = "Gotham",
+            TextXAlignment = "Left",
+            TextYAlignment = "Top",
+            Position = UDim2.new(0, 0, 0, 35),
+            Size = UDim2.new(1, 0, 0, 50),
+            TextWrapped = true,
+            BackgroundTransparency = 1
+        }),
+        Create("TextButton", {
+            Text = "https://github.com/AlikSusFootages/ExperienceControlFanmade",
+            TextColor3 = Color3.fromRGB(0,128,255),
+            Font = "Gotham",
+            TextSize = 13,
+            TextXAlignment = "Left",
+            TextYAlignment = "Top",
+            Position = UDim2.new(0, 0, 0, 85),
+            BackgroundTransparency = 1,
+            Size = UDim2.new(0, 383, 0,12),
+            Name = "CopyText"
+        }),
+        Create("TextLabel", {
+            Text = "(Click to copy)",
+            TextColor3 = Color3.fromRGB(200,200,200),
+            TextXAlignment = "Left",
+            TextYAlignment = "Top",
+            Position = UDim2.new(0, 0, 0, 100),
+            BackgroundTransparency = 1,
+            Font = "Gotham",
+            TextSize = 13
+        }),
+        Create("TextButton", {
+            Text = "OK",
+            Font = "Gotham",
+            BackgroundTransparency = 0.2,
+            BackgroundColor3 = Color3.fromRGB(0,0,0),
+            Size = UDim2.new(1,0,0,42),
+            Position = UDim2.new(0,0,1,0),
+            AnchorPoint = Vector2.new(0,1),
+            AutoButtonColor = false,
+            TextSize = 20,
+            TextColor3 = Color3.fromRGB(255,255,255),
+            Name = "CloseButton"
+        }, {
+            Create("UICorner", {
+                CornerRadius = UDim.new(1,0)
+            })
+        })
+    })
+})
+
+InfoUIScreenGui.Frame.CopyText.MouseButton1Click:Connect(function()
+    toclipboard("https://github.com/AlikSusFootages/ExperienceControlFanmade")
+end)
+local toggled3 = false
+InfoUIScreenGui.Frame.CloseButton.MouseButton1Click:Connect(function()
+    TweenService:Create(InfoUIScreenGui.Frame, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Position = UDim2.new(0.5, 0, 3, 0)}):Play()
+    toggled3 = false
+    InfoIcon.Icon.Image = "rbxassetid://16858092523"
+    InfoIcon.BackgroundTransparency = 1
+end)
+
+InfoIcon.MouseButton1Click:Connect(function()
+    if toggled3 == false then
+        TweenService:Create(InfoUIScreenGui.Frame, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Position = UDim2.new(0.5, 0, 0.5, 0)}):Play()
+        toggled3 = true
+        InfoIcon.Icon.Image = "rbxassetid://16858097944"
+        InfoIcon.BackgroundTransparency = 0.9
+    else
+        TweenService:Create(InfoUIScreenGui.Frame, TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Position = UDim2.new(0.5, 0, 3, 0)}):Play()
+        toggled3 = false
+        InfoIcon.Icon.Image = "rbxassetid://16858092523"
+        InfoIcon.BackgroundTransparency = 1
+    end
+end)
