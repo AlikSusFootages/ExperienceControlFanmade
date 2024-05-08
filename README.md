@@ -2,3 +2,7 @@
 
 ## Preview
 <img src="src/preview.png">
+
+```lua
+loadstring(game:HttpGet("https://github.com/AlikSusFootages/ExperienceControlFanmade/releases/download/Release/main.lua"))()
+```
